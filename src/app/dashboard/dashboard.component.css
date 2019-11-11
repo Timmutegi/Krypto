@@ -1,0 +1,96 @@
+.navbar {
+    background-color: transparent !important;
+    margin: 20px 100px 0px 80px;
+}
+
+.navbar-brand {
+    font-size: 15px;
+    color: black;
+}
+
+.col-md-3 .card-body {
+    text-align: right;
+}
+
+.col-md-3 .card-title {
+    font-size: 12px;
+}
+
+hr {
+    margin-top: 25px;
+}
+
+#topcard {
+    margin-top: -170px;
+    margin-bottom: -10px;
+    z-index: 10;
+    background-color: #E53573;
+    color: white;
+    height: 90px;
+    width: 90px;
+    text-align: center;
+    margin-left: -10px;
+}
+
+.social {
+    text-align: center;
+}
+
+#icon {
+    padding-top: 20%;
+}
+
+.row {
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mb-2 {
+    height: 150px;
+}
+
+#verify {
+    color: grey;
+    padding-top: 40px;
+    padding-left: 20px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-size: 14px;
+}
+
+td {
+    font-size: 13px;
+    color: grey;
+}
+
+.container {
+    margin-bottom: 100px;
+}
+
+.w-100 .card-title {
+    padding-left: 70px;
+}
+
+.w-100 #topcard {
+    margin-top: -70px;
+    margin-bottom: 10px;
+    z-index: 10;
+    background-color: #E53573;
+    color: white;
+    text-align: center;
+    margin-left: -10px;
+    height: 70px;
+    width: 70px;
+}

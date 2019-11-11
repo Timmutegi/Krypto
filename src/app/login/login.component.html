@@ -1,0 +1,49 @@
+<div class="login">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Krypto</a>
+    </nav>
+    <div class="overlay">
+        <div class="card" id="topcard" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <div class="social">
+                    <span><i class="fab fa-facebook-square fa-lg"></i></span>
+                    <span><i class="fab fa-twitter fa-lg"></i></span>
+                    <span><i class="fab fa-google-plus-g fa-lg"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="bottomcard" style="width: 22rem;">
+        <div class="card-body">
+            <h5 class="card-title">Welcome to Krypto</h5>
+            <form>
+                <div class="form-group mb-4">
+                    <select name="role" class="custom-select">
+                        <option selected="volvo">Choose Type...</option>
+                        <option value="volvo">Agent</option>
+                        <option value="saab">Landlord</option>
+                        <option value="fiat">Tenant</option>
+                        <option value="audi">Krypto Admin</option>
+                    </select>
+                </div>
+                <div class="form-group mb-4">
+                    <span><i class="fas fa-phone-alt"></i></span><input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                </div>
+                <div class="form-group mb-2">
+                    <span><i class="fas fa-lock"></i></span><input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+            </form>
+            <div class="row justify-content-center">
+                <button type="button" (click)="dashboard()" class="btn btn-primary"><span><i class="fas fa-fingerprint"></i></span> LOGIN</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand px-4" href="#">KRYPTO</a>
+            <a class="navbar-brand" href="#">ABOUT US</a>
+        </nav>
+    </footer>
+</div>

@@ -1,0 +1,77 @@
+#column1 {
+    width: 20%;
+}
+
+#column2 {
+    width: 80%;
+    background-color: #EAF1F5;
+}
+
+#leftcard {
+    margin-left: 40px;
+    margin-top: 70px;
+}
+
+#right-card {
+    margin-top: 70px;
+    margin-right: 50px;
+    text-align: center;
+}
+
+#right-card .card-body {
+    margin-top: 80px;
+}
+
+.card-text {
+    color: grey;
+    font-size: 13px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    outline: none;
+    box-shadow: none !important;
+    /* border: 1px solid #A01FBA !important; */
+    font-size: 12px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0px;
+}
+
+input:hover {
+    border-bottom: 2px solid #A01FBA !important;
+}
+
+textarea:hover {
+    border-bottom: 2px solid #A01FBA !important;
+}
+
+label {
+    margin-left: 10px;
+}
+
+#btn1 {
+    margin-top: 20px;
+    background-color: #E53573;
+    outline: none;
+    font-size: 13px;
+    padding: 10px 30px 10px 30px;
+    float: right;
+}
+
+#btn2 {
+    margin-top: 20px;
+    background-color: #E53573;
+    outline: none;
+    font-size: 12px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 80px;
+}
+
+.navbar {
+    background-color: transparent !important;
+    margin: 20px 100px 0px 40px;
+}
