@@ -1,0 +1,131 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">User</a>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card" id="leftcard">
+                <div class="card-body">
+                    <h5 *ngIf="toggle" class="card-title">New User</h5>
+                    <h5 *ngIf="!toggle" class="card-title">Update User</h5>
+                    <div class="overlay">
+                        <div class="card" id="topcard">
+                            <div class="card-body">
+                                <div class="social">
+                                    <span><i class="fas fa-user"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="message != null" class="d-flex justify-content-center">
+                        <div class="col-md-8 alert alert-info alert-dismissible fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" (click)="dismissAlert()" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <form [formGroup]="userForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" formControlName="username" class="form-control" id="username" [ngClass]="{'is-invalid': submitted && f.username.errors }" placeholder="Username">
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div>Username is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid': submitted && f.email.errors }" placeholder="Email Address">
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.pattern">Enter a valid email</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="password" formControlName="password" class="form-control" [ngClass]="{'is-invalid': submitted && f.email.errors }" placeholder="Password">
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">password is required</div>
+                                    <div *ngIf="f.password.errors.pattern">Password must be at least 6 characters</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" formControlName="user_type" [ngClass]="{'is-invalid': submitted && f.user_type.errors }" placeholder="Choose User Type">
+                                    <option value="" selected>Choose User Type</option>
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="LANDLORD">Landlord</option>
+                                    <option value="CARETAKER">Caretaker</option>
+                                    <option value="AGENT">Agent</option>
+                                    <option value="PUBLIC">Public</option>
+                                </select>
+                                <div *ngIf="submitted && f.user_type.errors" class="invalid-feedback">
+                                    <div *ngIf="f.user_type.errors.required">User type is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button *ngIf="toggle" type="submit" (click)="onSubmit()" class="btn text-white" id="btn1">SAVE</button>
+                        <button *ngIf="!toggle" type="submit" (click)="updateUser()" class="btn text-white" id="btn1">UPDATE USER</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" id="right-card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">LOGGED IN AS</h6>
+                    <h5 class="card-title">Robert Kanyoro</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p>
+                    <button type="submit" class="btn text-white" id="btn2">EDIT PROFILE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="card w-100">
+                <div class="card-body">
+                    <h6 class="card-title">Users</h6>
+                    <div class="overlay">
+                        <div class="card" id="topcard">
+                            <div class="card-body">
+                                <div class="social">
+                                    <span><i class="fas fa-clipboard fa-lg"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="deleteMessage != null" class="d-flex justify-content-center">
+                        <div class="col-md-8 alert alert-info alert-dismissible fade show" role="alert">
+                            {{deleteMessage}}
+                            <button type="button" class="close" (click)="dismissAlert()" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email Address</th>
+                                <th>User Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td>{{user.username}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.user_type}}</td>
+                                <td><a (click)="onUpdate(user.username)"><i class="fas fa-edit bg-success"></i></a><a (click)="onDelete(user.username)"><i class="fas fa-times-circle bg-danger"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,21 +1,44 @@
 <div class="sidebar">
     <p class="admin">AC KRYPTO ADMIN</p>
     <hr>
-    <P class="name"><img src="../src/assets/image/interior2.jpg">Robert Kanyoro</P>
+    <P class="name"><span><i class="fas fa-user"></i></span>Robert Kanyoro</P>
     <hr>
-    <p class="dashboard">
-        <a href="#"><span><i class="fas fa-tachometer-alt"></i></span>DASHBOARD</a>
-    </p>
-    <p class="branches">
-        <a href="#"><span><i class="fas fa-building"></i></span>BRANCHES</a>
-    </p>
-    <P class="banks">
-        <a href="#"><span><i class="fas fa-home"></i></span>OUR BANK</a>
-    </P>
-    <P class="invoices">
-        <a href="#"><span><i class="fas fa-file-invoice-dollar"></i></span>PENDING INVOICES</a>
-    </P>
-    <p class="events">
-        <a href="#"><span><i class="far fa-calendar-alt"></i></span>OUR EVENTS</a>
-    </p>
+    <div class="dashboard" routerLinkActive="active-link">
+        <a class="link" routerLink="/dashboard"><span><i class="fas fa-tachometer-alt"></i></span>DASHBOARD</a>
+    </div>
+    <div class="branches" routerLinkActive="active-link">
+        <a class="link" routerLink="/branch"><span><i class="fas fa-building"></i></span>BRANCHES</a>
+    </div>
+    <div class="branches" routerLinkActive="active-link">
+        <a class="link" routerLink="/region"><span><i class="fas fa-building"></i></span>REGIONS</a>
+    </div>
+
+    <div class="dropdown" routerLinkActive="active-link">
+        <a class="btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span><i class="fas fa-user"></i></span> INFRASTRUCTURE
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" routerLink="/apartment">APARTMENTS</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="#">ROOMS</a>
+        </div>
+    </div>
+    <div class="dropdown" routerLinkActive="active-link">
+        <a class="btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span><i class="fas fa-user"></i></span> USERS
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" routerLink="/landlord">LANDLORDS</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/caretaker">CARETAKERS</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/tenant">TENANT</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/agent">AGENTS</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/user">CREATE USER</a>
+        </div>
+    </div>
 </div>

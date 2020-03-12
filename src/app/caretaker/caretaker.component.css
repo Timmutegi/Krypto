@@ -1,3 +1,7 @@
+#datatable {
+    margin: 100px 5px 50px 5px;
+}
+
 #leftcard {
     margin-left: 40px;
     margin-top: 50px;
@@ -39,10 +43,7 @@
 }
 
 input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-textarea,
+[type="number"],
 select {
     outline: none;
     box-shadow: none !important;
@@ -54,16 +55,16 @@ select {
     border-radius: 0px;
 }
 
-textarea {
-    min-height: 100px;
-    max-height: 400px;
-}
-
-input:hover {
+select:hover {
     border-bottom: 2px solid #A01FBA !important;
 }
 
-textarea:hover {
+input[type="file"] {
+    border: none;
+    font-size: 13px;
+}
+
+.col-md-6 input:hover {
     border-bottom: 2px solid #A01FBA !important;
 }
 
@@ -110,17 +111,19 @@ label {
     width: 70px;
 }
 
-table i {
-    padding: 5px;
-    margin: 3px;
+.text-muted {
+    font-size: 12px;
 }
 
 .container {
     margin-bottom: 100px;
+    margin-top: 80px;
 }
 
 .container .row {
     margin-top: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .w-100 #topcard {
@@ -128,11 +131,28 @@ table i {
     width: 60px;
 }
 
-#datatable {
-    margin-top: 100px;
-}
-
 .invalid-feedback {
     margin-left: 10px;
     font-size: 13px;
+}
+
+table i {
+    padding: 5px;
+    margin: 3px;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.modal-body,
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 200px;
+    height: 200px;
 }

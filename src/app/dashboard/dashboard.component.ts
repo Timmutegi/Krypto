@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.dtOptions = {
+      // pagingType: 'full_numbers',
+      // pageLength: 2
+  };
   }
-
 }

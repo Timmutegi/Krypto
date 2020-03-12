@@ -1,74 +1,160 @@
-<div class="row">
-    <div id="column1" class="column">
-        <app-sidebar></app-sidebar>
-    </div>
-    <div id="column2" class="column">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">BRANCHES</a>
-        </nav>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card" id="leftcard">
-                    <div class="card-body">
-                        <h5 class="card-title">New Branch</h5>
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <input type="text" class="form-control" id="branchname" placeholder="Branch Name">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input type="text" class="form-control" id="username" placeholder="Username">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input type="email" class="form-control" id="email" placeholder="Email Address">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" id="managerfirstname" placeholder="Manager First Name">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" id="managerlastname" placeholder="Manager Last Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="address" placeholder="Address">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <input type="text" class="form-control" id="town" placeholder="Town">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input type="text" class="form-control" id="county" placeholder="County">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input type="text" class="form-control" id="phone" placeholder="Phone Number">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="description">Description</label>
-                                <div class="form-group col-md-12">
-                                    <textarea class="form-control" id="description" placeholder="Include a small description about this branch" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn text-white" id="btn1">SAVE</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" id="right-card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">LOGGED IN AS</h6>
-                        <h5 class="card-title">Robert Kanyoro</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        <button type="submit" class="btn text-white" id="btn2">EDIT PROFILE</button>
-                    </div>
-                </div>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" routerLink="/branch">Branches</a>
+    </nav>
 
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card" id="leftcard">
+                <div class="card-body">
+                    <h5 *ngIf="toggle" class="card-title">New Branch</h5>
+                    <h5 *ngIf="!toggle" class="card-title">Update Branch</h5>
+                    <div class="overlay">
+                        <div class="card" id="topcard">
+                            <div class="card-body">
+                                <div class="social">
+                                    <span><i class="fas fa-user"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="message != null" class="d-flex justify-content-center">
+                        <div class="col-md-8 alert alert-info alert-dismissible fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" (click)="dismissAlert()" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <form [formGroup]="branchForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" formControlName="branchName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.branchName.errors }" placeholder="Branch Name">
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div>Branch name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" formControlName="branchEmailAddress" class="form-control" [ngClass]="{'is-invalid': submitted && f.branchEmailAddress.errors }" placeholder="Email Address">
+                                <div *ngIf="submitted && f.branchEmailAddress.errors" class="invalid-feedback">
+                                    <div *ngIf="f.branchEmailAddress.errors.required">Email is required</div>
+                                    <div *ngIf="f.branchEmailAddress.errors.pattern">Enter a valid email</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <select formControlName="region" class="form-control" placeholder="Choose Region">
+                                    <option value="" selected>Choose Region</option>
+                                    <option *ngFor="let region of regions" value="{{region.regionID}}">{{region.regionName}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <select formControlName="agent" class="form-control" placeholder="Choose Agent">
+                                    <option value="" selected>Choose Agent</option>
+                                    <option *ngFor="let agent of agents" value="{{agent.agentID}}">{{agent.agentName}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="text" formControlName="branchBuildingLocation" class="form-control" [ngClass]="{'is-invalid': submitted && f.branchBuildingLocation.errors }" placeholder="Location">
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div>Location is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <input type="number" formControlName="branchPhoneNumber" class="form-control" [ngClass]="{'is-invalid': submitted && f.branchPhoneNumber.errors }" placeholder="Phone Number">
+                                <div *ngIf="submitted && f.branchPhoneNumber.errors" class="invalid-feedback">
+                                    <div *ngIf="f.branchPhoneNumber.errors.required">Phone number is required</div>
+                                    <div *ngIf="f.branchPhoneNumber.errors.pattern">Enter a valid phone number</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" formControlName="branchLatitude" class="form-control" [ngClass]="{'is-invalid': submitted && f.branchLatitude.errors }" placeholder="Latitude">
+                                <div *ngIf="submitted && f.branchLatitude.errors" class="invalid-feedback">
+                                    <div *ngIf="f.branchLatitude.errors.required">Latitude is required</div>
+                                    <div *ngIf="f.branchLatitude.errors.pattern">Enter a valid Latitude</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" formControlName="branchLongitude" class="form-control" [ngClass]="{'is-invalid': submitted && f.branchLongitude.errors }" placeholder="Longitude">
+                                <div *ngIf="submitted && f.branchLongitude.errors" class="invalid-feedback">
+                                    <div *ngIf="f.branchLongitude.errors.required">Longitude is required</div>
+                                    <div *ngIf="f.branchLongitude.errors.pattern">Enter a valid Longitude</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button *ngIf="toggle" type="submit" class="btn text-white" (click)="onSubmit()" id="btn1">SAVE</button>
+                        <button *ngIf="!toggle" type="submit" class="btn text-white" (click)="updateBranch()" id="btn1">UPDATE</button>
+                    </form>
+                </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card" id="right-card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">LOGGED IN AS</h6>
+                    <h5 class="card-title">Robert Kanyoro</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p>
+                    <button type="submit" class="btn text-white" id="btn2">EDIT PROFILE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="datatable" class="row">
+            <div class="card w-100">
+                <div class="card-body">
+                    <h5 class="card-title">Our Branches</h5>
+                    <div class="overlay">
+                        <div class="card" id="topcard">
+                            <div class="card-body">
+                                <div class="social">
+                                    <span><i class="fas fa-clipboard fa-lg"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="deleteMessage != null" class="d-flex justify-content-center">
+                        <div class="col-md-8 alert alert-info alert-dismissible fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" (click)="dismissAlert()" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
 
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Branch Name</th>
+                                <th>Email Address</th>
+                                <th>Phone Number</th>
+                                <th>Location</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let branch of branches">
+                                <td>{{branch.branchID}}</td>
+                                <td>{{branch.branchName}}</td>
+                                <td>{{branch.branchEmailAddress}}</td>
+                                <td>{{branch.branchPhoneNumber}}</td>
+                                <td>{{branch.branchBuildingLocation}}</td>
+                                <td>{{branch.branchLatitude}}</td>
+                                <td>{{branch.branchLongitude}}</td>
+                                <td><a (click)="onUpdate(branch.branchID)"><i class="fas fa-edit bg-success text-white"></i></a><a (click)="deleteBranch(branch.branchID)"><i class="fas fa-trash bg-danger text-white"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

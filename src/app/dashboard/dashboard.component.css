@@ -1,10 +1,9 @@
 .navbar {
     background-color: transparent !important;
-    margin: 20px 100px 0px 80px;
+    margin: 20px 100px 0px 20px;
 }
 
 .navbar-brand {
-    font-size: 15px;
     color: black;
 }
 
@@ -13,7 +12,7 @@
 }
 
 .col-md-3 .card-title {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 hr {
@@ -56,25 +55,6 @@ hr {
     padding-left: 20px;
 }
 
-table {
-    border-collapse: collapse;
-}
-
-th,
-td {
-    height: 50px;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    font-size: 14px;
-}
-
-td {
-    font-size: 13px;
-    color: grey;
-}
-
 .container {
     margin-bottom: 100px;
 }
@@ -93,4 +73,14 @@ td {
     margin-left: -10px;
     height: 70px;
     width: 70px;
+}
+
+table i {
+    padding: 5px;
+    color: white;
+    margin: 3px;
+}
+
+#datatable {
+    margin: 80px 40px 50px 40px;
 }

@@ -23,6 +23,11 @@
     margin-left: -10px;
 }
 
+.invalid-feedback {
+    margin-left: 10px;
+    font-size: 13px;
+}
+
 #right-card {
     margin-top: 50px;
     margin-right: 50px;
@@ -42,8 +47,8 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
-textarea,
-select {
+select,
+textarea {
     outline: none;
     box-shadow: none !important;
     /* border: 1px solid #A01FBA !important; */
@@ -54,16 +59,16 @@ select {
     border-radius: 0px;
 }
 
-textarea {
-    min-height: 100px;
-    max-height: 400px;
+input[type="file"] {
+    border: none;
+    font-size: 13px;
 }
 
-input:hover {
+.col-md-6 input:hover {
     border-bottom: 2px solid #A01FBA !important;
 }
 
-textarea:hover {
+select:hover {
     border-bottom: 2px solid #A01FBA !important;
 }
 
@@ -112,27 +117,22 @@ label {
 
 table i {
     padding: 5px;
+    color: white;
     margin: 3px;
 }
 
 .container {
+    margin-top: 80px;
     margin-bottom: 100px;
 }
 
 .container .row {
     margin-top: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .w-100 #topcard {
     height: 65px;
     width: 60px;
-}
-
-#datatable {
-    margin-top: 100px;
-}
-
-.invalid-feedback {
-    margin-left: 10px;
-    font-size: 13px;
 }

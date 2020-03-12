@@ -1,0 +1,170 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" routerLink="/tenant">Agent</a>
+    </nav>
+
+    <div class="row mb-8">
+        <div class="col-md-8">
+            <div class="card" id="leftcard">
+                <div class="card-body">
+                    <h5 *ngIf="!toggle" class="card-title">Create Agent</h5>
+                    <h5 *ngIf="toggle" class="card-title">Update Agent</h5>
+                    <div class="overlay">
+                        <div class="card" id="topcard">
+                            <div class="card-body">
+                                <div class="social">
+                                    <span><i class="fas fa-user"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="message != null" class="d-flex justify-content-center">
+                        <div class="col-md-8 alert alert-info alert-dismissible fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" (click)="dismissAlert()" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="agentForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6 hoverable">
+                                <input type="text" formControlName="fullname" class="form-control" [ngClass]="{'is-invalid': submitted && f.fullname.errors }" placeholder="Full Name">
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div>Full name is required</div>
+                                </div>
+                            </div>
+                            <div *ngIf="!toggle" class="form-group col-md-6 hoverable">
+                                <select formControlName="username" class="form-control" [ngClass]="{'is-invalid': submitted && f.username.errors }">
+                                    <option value="" selected>Choose Agent Username</option>
+                                    <option *ngFor="let listedAgent of listedAgents" value="{{listedAgent.id}}">{{listedAgent.username}}</option>
+                                </select>
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div>Username is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 hoverable">
+                                <input type="number" formControlName="phone" class="form-control" [ngClass]="{'is-invalid': submitted && f.phone.errors }" placeholder="Phone Number">
+                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                    <div *ngIf="f.phone.errors.required">Phone Number is required</div>
+                                    <div *ngIf="f.phone.errors.pattern">Enter a valid phone number</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 hoverable">
+                                <input type="number" formControlName="national" class="form-control" [ngClass]="{'is-invalid': submitted && f.national.errors }" placeholder="National ID">
+                                <div *ngIf="submitted && f.national.errors" class="invalid-feedback">
+                                    <div *ngIf="f.national.errors.required">National ID is required</div>
+                                    <div *ngIf="f.national.errors.pattern">Enter a valid ID number</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div *ngIf="!toggle" class="form-group col-md-6">
+                                <label for="photo">Profile Picture</label>
+                                <input type="file" formControlName="photo" #photo class="form-control" (change)="choosePhoto(photo.files)" id="photo" [ngClass]="{'is-invalid': submitted && f.photo.errors }" placeholder="Profile Picture">
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div>Profile Picture is required</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit" *ngIf="!toggle" class="btn text-white" (click)="onSubmit()" id="btn1">SAVE</button>
+
+                        <button type="submit" *ngIf="toggle" class="btn text-white" (click)="updateAgent()" id="btn1">UPDATE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card" id="right-card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">LOGGED IN AS</h6>
+                    <h5 class="card-title">Robert Kanyoro</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p>
+                    <button type="submit" class="btn text-white" id="btn2">EDIT PROFILE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="image">
+                        {{photoMessage}}
+                        <img src="{{avatarBlobUrl}}">
+                        <input *ngIf="showInput" type="file" #updatePhoto class="form-control" (change)="choosePhoto(updatePhoto.files)" id="updatePhoto" placeholder="Profile Picture">
+                        <button *ngIf="showInput" type="button" (click)="updateImage(updatedimage)" #updatedimage value={{updateNationalID}} class="btn btn-success btn-sm">SAVE</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="!showButton" type="button" class="btn btn-info btn-sm" (click)="chooseImage()">UPDATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="datatable" class="row">
+        <div class="card w-100">
+            <div class="card-body">
+                <h6 class="card-title">Agents</h6>
+                <div class="overlay">
+                    <div class="card" id="topcard">
+                        <div class="card-body">
+                            <div class="social">
+                                <span><i class="fas fa-clipboard fa-lg"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="deleteMessage != null" class="d-flex justify-content-center">
+                    <div class="col-md-8 alert alert-info alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="close" (click)="dismissAlert()" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <table datatable class="row-border hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Phone Number</th>
+                            <th>National ID</th>
+                            <th>Picture</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let agent of agents">
+                            <td>{{agent.agentID}}</td>
+                            <td>{{agent.username.username}}</td>
+                            <td>{{agent.agentName}}</td>
+                            <td>{{agent.agentPhoneNumber}}</td>
+                            <td>{{agent.agentNationalID}}</td>
+                            <td><button type="button" class="btn btn-info btn-sm" (click)="displayImage(agent.agentID, agent.agentNationalID)" data-toggle="modal" data-target="#exampleModal">View</button></td>
+                            <td><a (click)="onUpdate(agent.agentID)"><i class="fas fa-edit bg-success"></i></a><a (click)="deleteAgent(agent.agentID)"><i class="fas fa-times-circle bg-danger"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

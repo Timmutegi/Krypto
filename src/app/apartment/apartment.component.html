@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Apartment</a>
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{avatarBlobUrl}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="datatable" class="row">
+        <div class="card w-100">
+            <div class="card-body">
+                <h6 class="card-title">Landlords</h6>
+                <div class="overlay">
+                    <div class="card" id="topcard">
+                        <div class="card-body">
+                            <div class="social">
+                                <span><i class="fas fa-clipboard fa-lg"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="deleteMessage != null" class="d-flex justify-content-center">
+                    <div class="col-md-8 alert alert-info alert-dismissible fade show" role="alert">
+                        {{deleteMessage}}
+                        <button type="button" class="close" (click)="dismissAlert()" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <table datatable class="row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Landlord</th>
+                            <th>Caretaker</th>
+                            <th>County</th>
+                            <th>Estate</th>
+                            <th>Branch</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th>Student Type</th>
+                            <th>Picture</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let apartment of apartments">
+                            <td></td>
+                            <td>{{apartment.apartmentName}}</td>
+                            <td>{{apartment.landlord}}</td>
+                            <td>{{apartment.caretaker}}</td>
+                            <td>{{apartment.apartmentCounty}}</td>
+                            <td>{{apartment.apartmentEstate}}</td>
+                            <td>{{apartment.branch}}</td>
+                            <td>{{apartment.apartmentLatitude}}</td>
+                            <td>{{apartment.apartmentLongitude}}</td>
+                            <td>{{apartment.apartmentStudentType}}</td>
+                            <td>{{apartment.apartmentAvatar}}</td>
+                            <td><button type="button" class="btn btn-info btn-sm" (click)="displayImage(apartment.apartmentID)" data-toggle="modal" data-target="#exampleModal">View</button></td>
+                            <td><a (click)="deleteApartment(apartment.apartmentID)"><i class="fas fa-times-circle bg-danger"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
-<app-admin *ngIf="(
-        router.url === '/dashboard'
+<app-admin *ngIf="!(
+        router.url === '/'
     )">
 </app-admin>
 
@@ -7,7 +7,3 @@
         router.url === '/'
     )">
 </app-login>
-<app-branch *ngIf="(
-        router.url === '/branch'
-    )">
-</app-branch>

@@ -1,0 +1,66 @@
+#datatable {
+    margin: 40px 5px 50px 5px;
+}
+
+.container-fluid {
+    height: 100vh;
+}
+
+.navbar {
+    background-color: transparent !important;
+    margin: 20px 100px 0px 40px;
+}
+
+.w-100 .card-title {
+    padding-left: 70px;
+}
+
+.w-100 #topcard {
+    margin-top: -70px;
+    margin-bottom: 10px;
+    z-index: 10;
+    background-color: #E53573;
+    color: white;
+    text-align: center;
+    margin-left: -10px;
+    height: 70px;
+    width: 70px;
+}
+
+table i {
+    padding: 5px;
+    color: white;
+    margin-right: 5px;
+}
+
+.w-100 #topcard {
+    height: 65px;
+    width: 60px;
+}
+
+th,
+td {
+    height: 50px;
+    padding: 15px;
+    font-size: 15px;
+}
+
+td {
+    text-align: center;
+}
+
+.invalid-feedback {
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
